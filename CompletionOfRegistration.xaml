@@ -1,0 +1,21 @@
+﻿<Window x:Class="Example_SQLite.CompletionOfRegistration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example_SQLite"
+        mc:Ignorable="d"
+        Title="Completion of registration" Height="170" Width="300">
+    <Grid>
+        <TextBox x:Name="textbox" Grid.Row="0" HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Center" Text="You have successfully registered"
+                 FontSize="15" BorderThickness="0"/>
+        <Button x:Name="close" Grid.Row="1" Width="130" Height="40" Click="close_Click" Content="OK"
+                Background="#FF6966" Foreground="White" BorderThickness="0" FontSize="25"
+                FontWeight="Bold"  Cursor="Hand"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

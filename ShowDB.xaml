@@ -1,0 +1,193 @@
+﻿<Page x:Class="Example_SQLite.ShowDB"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Example_SQLite"
+      xmlns:fa5="http://schemas.fontawesome.com/icons/"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="ShowDB">
+    <Page.Resources>
+        <Style  TargetType="Button" x:Key="updateStyle">
+            <Style.Setters>
+                <Setter Property="Button.Foreground" Value="#FFF58787" />
+                <Setter Property="Button.FontFamily" Value="Verdana" />
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Name="border" BorderThickness="0" BorderBrush="Black"
+                                    Background="{TemplateBinding Background}" CornerRadius="4">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="transparent"/>
+                                    <Setter Property="Opacity" Value="0.91" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="FontSize" Value="35"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style  TargetType="Button" x:Key="removeButtonStyle">
+            <Style.Setters>
+                <Setter Property="Button.Foreground" Value="#FF637E89" />
+                <Setter Property="Button.FontFamily" Value="Verdana" />
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Name="border" BorderThickness="0" BorderBrush="Black"
+                                    Background="{TemplateBinding Background}" CornerRadius="4">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="transparent"/>
+                                    <Setter Property="Opacity" Value="0.91" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FF37474F"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="1"/>
+        </Style>
+        <Style TargetType="Label">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="grid">
+        <Rectangle Fill="White" Opacity="0.5" Grid.RowSpan="6" Grid.ColumnSpan="6" />
+        <DataGrid x:Name="DataGridMain" Grid.RowSpan="6" Grid.ColumnSpan="2" Grid.Column="1" 
+                  Padding="20" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="18" 
+                  BorderThickness="0" SelectionMode="Single" Background="Transparent"
+                  CanUserAddRows="False" AlternatingRowBackground="#FFACC7BF" 
+                  GridLinesVisibility="None" Loaded="DataGridMain_Loaded" Cursor="Pen" MinColumnWidth="80"
+                  RowHeaderWidth="40" FrozenColumnCount="1" >
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="#AA6CA02C"/>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="#EEEEEE" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="id" Header="ID"   Binding="{Binding Id}" 
+                    HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn x:Name="VagNum" Header="Login"   Binding="{Binding Login}"
+                                    HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn x:Name="Tara" Header="Password"  Binding="{Binding Password}"
+                                    HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTemplateColumn x:Name="removeButton" Header="Del" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Border>
+                                <Button  fa5:Awesome.Content="Solid_MinusCircle" Width="30"
+                                    Height="25" Click="removeButton_Click" Style="{StaticResource removeButtonStyle}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"
+                    Margin="0,20,0,0">
+            <Button x:Name="upload" fa5:Awesome.Content="Solid_Upload" HorizontalAlignment="Center" 
+                Width="40" Height="40" Background="Transparent"  FontWeight="ExtraBold"
+                Click="upload_Click" Style="{StaticResource updateStyle}"/>
+            <Label Content="Upload" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="3" Margin="0,20,0,0" Orientation="Vertical" HorizontalAlignment="Left">
+            <Button x:Name="download" fa5:Awesome.Content="Solid_Download" HorizontalAlignment="Center"
+                Width="40" Height="40" Background="Transparent"  FontWeight="ExtraBold"
+                VerticalAlignment="Top"  Style="{StaticResource updateStyle}" Click="download_insert"/>
+            <Label Content="Download"/>
+        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Page>
