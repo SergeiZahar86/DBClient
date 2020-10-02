@@ -19,10 +19,11 @@ namespace Example_SQLite
         private static Global instance;
         private String name = "";
         private Semaphore sem;
-
         SqliteConnection conn;
-        DBService.Client client;
-
+        /// //////////////////////////////////////////////////////////
+        DBService.Client client;                                  ///
+        public List<RowTab> DATA;                                 ///
+        /// //////////////////////////////////////////////////////////
         public string Name
         {
             get => name;
@@ -39,19 +40,20 @@ namespace Example_SQLite
             this.sem = new Semaphore(0, 1);
             this.conn = new SqliteConnection("Data Source= C:/Users/zsv/source/repos/Example-SQLite/Registration.db");
             this.conn.Open();
-            //////////////////
-            TTransport transport = new TSocket("localhost", 9090);
-            TProtocol proto = new TBinaryProtocol(transport);
-            this.client = new DBService.Client(proto);
+            ////////////////////////////////////////////////////////////////////////////////////////
+            TTransport transport = new TSocket("localhost", 9090);                          ////////
+            TProtocol proto = new TBinaryProtocol(transport);                               ////////
+            this.client = new DBService.Client(proto);                                      ////////
             transport.Open();
-
+            DATA = new List<RowTab>();
+            ////////////////////////////////////////////////////////////////////////////////////////
         }
-        
-        public List<Row> TestServer()
-        {
-            return (this.client.listRow());
-        }
-
+        /// ////////////////////////////////////////////////////////
+        public List<Row> TestServer()                        ///////
+        {                                                    ///////
+            return (this.client.listRow());                  ///////
+        }                                                    ///////
+        /// ////////////////////////////////////////////////////////
         public SqliteCommand getCmd()
         {
             return this.conn.CreateCommand();

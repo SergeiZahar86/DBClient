@@ -21,7 +21,7 @@ namespace Example_SQLite
     public partial class ShowDB : Page
     {
         private Global global;
-        List<RowTab> DATA = new List<RowTab>();
+        //List<RowTab> DATA = new List<RowTab>();
         //MainWindow mainWindow;
         public ShowDB()
         {
@@ -84,9 +84,9 @@ namespace Example_SQLite
             cmd.ExecuteNonQuery();
             
             int idx = DataGridMain.SelectedIndex;
-            this.DATA.RemoveAt(idx);
+            global.DATA.RemoveAt(idx);
             DataGridMain.ItemsSource = null;
-            DataGridMain.ItemsSource = this.DATA;
+            DataGridMain.ItemsSource = global.DATA;
         }
         private void download_insert(object sender, RoutedEventArgs e)
         {
@@ -102,7 +102,7 @@ namespace Example_SQLite
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@pass", pass);
             int id = Convert.ToInt32(cmd.ExecuteScalar());
-            DATA.Add(new RowTab(id, login, pass));
+            global.DATA.Add(new RowTab(id, login, pass));
 
         }
     }
