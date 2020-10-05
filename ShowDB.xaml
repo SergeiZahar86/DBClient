@@ -123,7 +123,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="id" Header="ID"   Binding="{Binding Id}" 
+                <DataGridTextColumn x:Name="id" Header="ID"   Binding="{Binding ID}" 
                     HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True">
                     <DataGridTextColumn.CellStyle>
                         <Style>
@@ -160,6 +160,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="textbox" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,0,50,0"
+                   FontSize="14" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" 
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right"
                     Margin="0,20,0,0">
             <Button x:Name="upload" fa5:Awesome.Content="Solid_Upload" HorizontalAlignment="Center" 

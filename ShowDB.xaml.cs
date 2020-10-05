@@ -55,7 +55,6 @@ namespace Example_SQLite
                  DATA.Add(new RowTab(id, log_db, pass_db));
              }
             */
-
             List<Row> data = global.TestServer();
 
             DataGridMain.ItemsSource = data;// DATA;
@@ -69,7 +68,16 @@ namespace Example_SQLite
 
             DataGridMain.ItemsSource = null;
             //DataGridMain.ItemsSource = DataGridMain.UpdateDefaultStyle();
-            DataGridMain_Loaded(null,null);
+            try
+            {
+                List<Row> data = global.TestServer();
+
+                DataGridMain.ItemsSource = data;// DATA;
+            }
+            catch (Exception p)
+            {
+                textbox.Text = p.ToString();
+            }
 
         }
         private void removeButton_Click(object sender, RoutedEventArgs e)
