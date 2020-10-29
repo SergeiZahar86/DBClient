@@ -34,7 +34,7 @@ namespace Example_SQLite
             this.conn.Open();
             */
             ////////////////////////////////////////////////////////////////////////////////////////
-            this.transport = new TSocket("localhost", 9090);                          ////////
+            this.transport = new TSocket("localhost", 9000);                          ////////
             TProtocol proto = new TBinaryProtocol(transport);                               ////////
             this.client = new DBService.Client(proto);                                      ////////
            //this.transport.Open();
