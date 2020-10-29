@@ -34,7 +34,8 @@ namespace Example_SQLite
             this.conn.Open();
             */
             ////////////////////////////////////////////////////////////////////////////////////////
-            this.transport = new TSocket("localhost", 9000);                          ////////
+            this.transport = new TSocket("localhost", 9000); //  localhost - зарезервированное слово означающее что сервер и клиент на одной машине
+                                                             // 9000 - порт, любое число до 65000
             TProtocol proto = new TBinaryProtocol(transport);                               ////////
             this.client = new DBService.Client(proto);                                      ////////
            //this.transport.Open();
