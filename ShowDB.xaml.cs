@@ -31,7 +31,7 @@ namespace Example_SQLite
         
         private void DataGridMain_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<RowTab> result = new List<RowTab>();
+            List<RowTab> result = new List<RowTab>();
             /*
             for (int i = 0; i < 25; i++)
             {
@@ -40,19 +40,22 @@ namespace Example_SQLite
                 result.Add(new RowTab(i + 1, c, (88345634 + i).ToString(), (float)(i + 0.5), (float)(i + 1.5), (float)(i + 2.5)));
             }
             */
-            /* var cmd = global.getCmd();
+
+
+            /*
+             var cmd = global.getCmd();
 
              cmd.CommandText = "select * from RegistrationUsers";
              var ret = cmd.ExecuteReader();
              //textbox.Text = "";
-             DATA.Clear();
+             global.DATA.Clear();
              while (ret.Read())
              {
                  int id = ret.GetInt32(0);
                  String log_db = ret.GetString(1);
                  String pass_db = ret.GetString(2);
-                 //textbox.Text = textbox.Text + id + " " + log_db + " " + pass_db + "\n";
-                 DATA.Add(new RowTab(id, log_db, pass_db));
+                //textbox.Text = textbox.Text + id + " " + log_db + " " + pass_db + "\n";
+                global.DATA.Add(new RowTab(id, log_db, pass_db));
              }
             */
             List<Row> data = global.TestServer();
